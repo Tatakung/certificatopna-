@@ -1,0 +1,29 @@
+{
+    "glyphicons halflings": {
+        "normal": "glyphicons_halflings_normal_4bf4c90600ef2617211b8a7969a7b830"
+    },
+    "sarabun": {
+        "100_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_100_italic_538cfa86ced033e1be80ded5f5ccc906",
+        "200_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_200_italic_d85b5b380e115335f7363038e30e4a06",
+        "300_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_300_italic_b6910f148b06660ae2bcd9ad001a2dbc",
+        "italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_italic_39a49b2aa5664d1be86d823f244731e1",
+        "500_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_500_italic_f5b7e9c8434022087c0e41defdb05779",
+        "600_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_600_italic_8abe7fe5ea876ae4aaf585df524895b0",
+        "bold_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_bold_italic_579e55fc8d60b43110af1b684440fea4",
+        "800_italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_800_italic_402c926653a46e21f582ccedde9780e1",
+        "100": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_100_282490deb2ffad85e92e03f90e213ed0",
+        "200": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_200_7042dd98c53980c349ef8d9c8cc7818c",
+        "300": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_300_21578e470011cc718984934a43c8a3cc",
+        "normal": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_normal_08817d06f2471f93e55b16097b3483a5",
+        "500": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_500_ed8ecb9db934a3bda27977d27791ea1b",
+        "600": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_600_2c81e60815a2cd9b97ba6ce809d441b0",
+        "bold": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/sarabun_bold_c290e79cf348fb737ddd51785c641c10",
+        "800": "sarabun_800_ee479095f62ffb43dc9d6fea37ac087f"
+    },
+    "thsarabunnew": {
+        "normal": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/thsarabunnew_normal_7a5ef91c02e290c9d6ffff3e3a1fbdeb",
+        "bold": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/thsarabunnew_bold_4b53d2b9282eec2ca9142b22e8da6561",
+        "italic": "C:\\xampp\\htdocs\\certificate\\storage\\fonts\/thsarabunnew_italic_c6bf36ff7dbb79c86f065719d8a1ab27",
+        "bold_italic": "thsarabunnew_bold_italic_48dd8b6a759e94b1f2b8bccdc3edf4a4"
+    }
+}
