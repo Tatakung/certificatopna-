@@ -15,19 +15,19 @@ class AdminController extends Controller
         return view('adminHome', compact('users'));
     }
 
-    public function userdetail($id)
+    public function userdetail($uuid)
     {
-        $detail = User::find($id);
+        $detail = User::where('uuid', $uuid)->firstOrFail(); 
         return view('userdetail', compact('detail'));
     }
 
 
-    public function historyuser($id)
+    public function historyuser($uuid)
     {
-        $finduser = User::find($id);
+        $finduser = User::where('uuid', $uuid)->firstOrFail(); 
         // ค้นหาข้อมูลการขออนุมัติเดินทางของผู้ใช้ที่กำลังเข้าสู่ระบบ
         $data = TravelApproval::where('employee_id', $finduser->id)
-            ->select('id', 'created_at', 'faculty_count')
+            ->select('id', 'created_at', 'faculty_count','uuid')
             ->get();
 
         return view('historyuser',compact('data','finduser'));

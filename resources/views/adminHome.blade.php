@@ -99,6 +99,8 @@
     .detail-link:hover {
         background-color: #45a049;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        color:#f1f8e9 ;
+        text-decoration: none;
     }
 
     /* Breadcrumb */
@@ -149,7 +151,7 @@
 
 
     <h2>รายชื่อพนักงาน</h2>
-    <div class="table-container">
+    <div class="table-container mb-4">
         <table class="table">
             <thead>
                 <tr>
@@ -165,7 +167,7 @@
                             <td>{{ $users->prefix }}{{ $users->name }} {{ $users->lname }}</td>
                             <td>{{ $users->position }}</td>
                             <td>
-                                <a href="{{ route('userdetail', ['id' => $users->id]) }}"
+                                <a href="{{ route('userdetail', ['uuid' => $users->uuid]) }}"
                                     class="detail-link">ดูรายละเอียด</a>
                             </td>
                         </tr>

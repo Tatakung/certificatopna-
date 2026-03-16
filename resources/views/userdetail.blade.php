@@ -1,6 +1,5 @@
 @extends('layouts.user')
 @section('title', 'รายละเอียด')
-
 @section('content')
     <style>
         #now a {
@@ -55,6 +54,7 @@
         .btn-edit:hover {
             background-color: #E49900;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color : white ; 
         }
 
         .btn-history {
@@ -66,8 +66,9 @@
         }
 
         .btn-history:hover {
-            background-color: #45a049;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: #4CAF50;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            color : white ; 
         }
 
         /* Responsive Design */
@@ -199,18 +200,12 @@
             }
         }
     </style>
-
     <ol class="breadcrumb">
         <li class="breadcrumb-item" id="now"><a href="{{ route('admin.home') }}">หน้าแรก</a></li>
         <li class="breadcrumb-item active" id="now"><a
-                href="{{ route('userdetail', ['id' => $detail->id]) }}">รายละเอียด</a></li>
+                href="{{ route('userdetail', ['uuid' => $detail->uuid]) }}">รายละเอียด</a></li>
         <li class="breadcrumb-item active" aria-current="page">ประวัติขอใบอนุมัติ</li>
     </ol>
-
-
-
-
-
     <h2>รายละเอียด</h2>
     <div class="detail-container">
         <p>เลขประจำตัว : {{ $detail->numberid ?? 'ไม่ระบุ' }}</p>
@@ -218,12 +213,12 @@
         <p>ตำแหน่ง: {{ $detail->position }}</p>
         <p>ระดับ: {{ $detail->level }}</p>
         <p>สังกัด: {{ $detail->department }}</p>
-        <p>แผนก: {{ $detail->section }}</p>
-        <p>กอง: {{ $detail->division }}</p>
-        <p>เบอร์ติดต่อ: {{ $detail->phone_number }}</p>
+        <p>แผนก: {{ $detail->section ?? '-' }}</p>
+        <p>กอง: {{ $detail->division ?? '-' }}</p>
+        <p>เบอร์ติดต่อ: {{ $detail->phone_number ?? '-' }}</p>
         <button class="btn btn-edit" type="button" data-toggle="modal" data-target="#test">แก้ไข</button>
         {{-- <button class="btn btn-history" type="button">ประวัติการขอใบอนุมัติ</button> --}}
-        <a href="{{ route('historyuser', ['id' => $detail->id]) }}" class="btn btn-history">ประวัติการขอใบอนุมัติ</a>
+        <a href="{{ route('historyuser', ['uuid' => $detail->uuid]) }}" class="btn btn-history">ประวัติการขอใบอนุมัติ</a>
     </div>
     {{-- ส่วนmodal --}}
     <div class="modal fade" id="test" role="dialog" aria-hidden="true">
@@ -233,7 +228,7 @@
                     <h5 class="modal-title">ต้องการแก้ไขข้อมูล?</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('updateuser', ['id' => $detail->id]) }}" method="POST">
+                <form action="{{ route('updateuser', ['uuid' => $detail->uuid]) }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">

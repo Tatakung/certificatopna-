@@ -38,6 +38,7 @@ class TravelApproval extends Model
         'vehicle_expenses' , 
         'fuel_expenses',
         'food_expenses',
+        'uuid' , 
         
     ];
     //เชื่อมตาราง user

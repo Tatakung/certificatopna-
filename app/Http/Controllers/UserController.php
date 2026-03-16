@@ -10,9 +10,44 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+
+    public function distance(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+        // ฉันอยากจะเชื่อมต่อ api กับ google อ่ะ
+        return response()->json([
+            'distance' => 750
+        ]);
+    }
+    public function calculate(Request $request)
+    {
+        dd('จอยต้า');
+        exit;
+        $from = $request->from;
+        $to = $request->to;
+
+        $apiKey = "YOUR_GOOGLE_API_KEY";
+
+        $response = Http::get("https://maps.googleapis.com/maps/api/distancematrix/json", [
+            'origins' => $from,
+            'destinations' => $to,
+            'key' => $apiKey
+        ]);
+
+        $data = $response->json();
+
+        $distance = $data['rows'][0]['elements'][0]['distance']['text'];
+
+        return response()->json([
+            'distance' => $distance
+        ]);
+    }
     //
     public function showform()
     {
@@ -20,8 +55,6 @@ class UserController extends Controller
         $users = User::select('id', 'prefix', 'name', 'lname', 'position', 'is_admin', 'level')->get();  // ดึงข้อมูล id และ name จาก users
         return view('formcer', compact('users', 'getprovince'));
     }
-
-
     public function savedata(Request $request)
     {
         $driver = $request->input('driver');
@@ -65,6 +98,7 @@ class UserController extends Controller
         }
 
         $travelApproval = TravelApproval::create([
+            'uuid' =>  Str::uuid(),
             'employee_id' => auth()->user()->id,
             'at' => $request->at,
             'name' => $request->name,
@@ -145,16 +179,15 @@ class UserController extends Controller
 
         // ค้นหาข้อมูลการขออนุมัติเดินทางของผู้ใช้ที่กำลังเข้าสู่ระบบ
         $data = TravelApproval::where('employee_id', $user->id)
-            ->select('id', 'created_at', 'faculty_count')
+            ->select('id', 'created_at', 'faculty_count', 'uuid')
             ->orderBy('created_at', 'desc')
             ->get();
-
         return view('homepage', compact('data'));
     }
 
-    public function detail($id)
+    public function detail($uuid)
     {
-        $travelApproval = TravelApproval::find($id);
+        $travelApproval = TravelApproval::where('uuid', $uuid)->firstOrFail();
         $workassignment = WorkAssignment::where('travel_approval_id', $travelApproval->id)->get();
         $travelapprovaldetail = TravelApprovalDetail::where('travel_approval_id', $travelApproval->id)->get();
         return view('detail', compact('travelApproval', 'workassignment', 'travelapprovaldetail'));
@@ -230,11 +263,12 @@ class UserController extends Controller
 
 
 
-    public function newpubliccar($id){
+    public function newpubliccar($id)
+    {
         $travelApproval = TravelApproval::find($id);
         $work_location = WorkAssignment::where('travel_approval_id', $id)->get();
         $work_task = WorkAssignment::where('travel_approval_id', $id)->get();
-        $pdfs = PDF::loadview('newpubliccar', compact('travelApproval', 'work_location','work_task'));
+        $pdfs = PDF::loadview('newpubliccar', compact('travelApproval', 'work_location', 'work_task'));
         return $pdfs->stream();
     }
 

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'section',
         'division',
         'phone_number',
+        'uuid' , 
     ];
 
 

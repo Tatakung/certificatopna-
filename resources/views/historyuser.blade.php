@@ -132,7 +132,7 @@
 
 <ol class="breadcrumb">
     <li class="breadcrumb-item" id="now"><a href="{{ route('admin.home') }}">หน้าแรก</a></li>
-    <li class="breadcrumb-item active" id="now"><a href="{{ route('userdetail', ['id' => $finduser->id]) }}">รายละเอียด</a></li>
+    <li class="breadcrumb-item active" id="now"><a href="{{ route('userdetail', ['uuid' => $finduser->uuid]) }}">รายละเอียด</a></li>
     <li class="breadcrumb-item active" id="now"><a href="">ประวัติขอใบอนุมัติ</a></li>
 </ol>
 
@@ -168,7 +168,7 @@
                             {{ $thaiDateWithYear }}
                         </td>
                         <td>
-                            <a href="{{ route('detail', ['id' => $item->id]) }}" class="detail-link">ดูรายละเอียด</a>
+                            <a href="{{ route('detail', ['uuid' => $item->uuid]) }}" class="detail-link">ดูรายละเอียด</a>
                         </td>
                     </tr>
                 @endforeach

@@ -73,6 +73,7 @@ class RegisterController extends Controller
         $level = isset($data['level']) ? $data['level'] : null;
         $password = isset($data['numberid']) ? $data['numberid'] : Str::random(8); // ถ้าไม่มี numberid ให้ใช้รหัสผ่านแบบสุ่ม
         return User::create([
+            'uuid' => Str::uuid(),
             'name' => $data['name'],
             'numberid' => $data['numberid'],
             'password' => Hash::make($password),
@@ -94,14 +95,14 @@ class RegisterController extends Controller
     }
 
 
-    public function updateuser(HttpRequest $request, $id)
+    public function updateuser(HttpRequest $request, $uuid)
     {
         $request->validate([
             'firstName' => 'required|string',
             'lastName' => 'required|string|',
             'position' => 'required|string',
         ]);
-        $update = User::find($id);
+        $update = User::where('uuid', $uuid)->firstOrFail();
         $update->name = $request->input('firstName');
         $update->lname = $request->input('lastName');
         $update->position = $request->input('position');

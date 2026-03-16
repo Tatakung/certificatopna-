@@ -26,17 +26,19 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 //เฉพาะแอดมิน
 Route::middleware(['web', 'is_admin'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'showuser'])->name('admin.home');
-    Route::get('/admin/userdetail/{id}', [AdminController::class, 'userdetail'])->name('userdetail');
+    Route::get('/admin/userdetail/{uuid}', [AdminController::class, 'userdetail'])->name('userdetail');
     Route::get('/admin/createuser', [RegisterController::class, 'showRegistrationForm'])->name('createuser');
-    Route::post('/employee/detail/{id}', [RegisterController::class, 'updateuser'])->name('updateuser');
-    Route::get('/admin/historyuser/{id}', [AdminController::class, 'historyuser'])->name('historyuser'); //หน้าhistoryuser.blade.php
+    Route::post('/employee/detail/{uuid}', [RegisterController::class, 'updateuser'])->name('updateuser');
+    Route::get('/admin/historyuser/{uuid}', [AdminController::class, 'historyuser'])->name('historyuser'); //หน้าhistoryuser.blade.php
 });
 //สำหรับพนักงานและแอดมิน
 Route::middleware(['web', 'auth'])->group(function () {
+    // Route::get('/employee/distance', [UserController::class, 'calculate']);
+    Route::get('/employee/distance', [UserController::class, 'distance']);
     Route::get('/employee/home', [UserController::class, 'homepage'])->name('homepage');   //หน้าแรกของพนักงาน
     Route::get('/employee/formcer', [UserController::class, 'showform'])->name('formcer'); //หน้าformcer.blade.php
     Route::post('/employee/formcer/save', [UserController::class, 'savedata'])->name('savedata'); //ส่วนบันทึกจากหน้า formcer
-    Route::get('/employee/detail/{id}', [UserController::class, 'detail'])->name('detail'); //หน้าdetail.blade.php
+    Route::get('/employee/detail/{uuid}', [UserController::class, 'detail'])->name('detail'); //หน้าdetail.blade.php
     Route::get('/employee/detail/file/{id}', [UserController::class, 'printpdf'])->name('printpdf'); //หน้า file ขออนุมัติการเดินทาง
     Route::get('/fileprice', [UserController::class, 'fileprice'])->name('fileprice');
 
