@@ -41,6 +41,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/employee/detail/{uuid}', [UserController::class, 'detail'])->name('detail'); //หน้าdetail.blade.php
     Route::get('/employee/detail/file/{id}', [UserController::class, 'printpdf'])->name('printpdf'); //หน้า file ขออนุมัติการเดินทาง
     Route::get('/fileprice', [UserController::class, 'fileprice'])->name('fileprice');
+    Route::get('/test', [UserController::class, 'test'])->name('test');
 
 
     Route::get('/province', [UserController::class, 'province'])->name('province');

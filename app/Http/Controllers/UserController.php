@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Spatie\Browsershot\Browsershot;
 
 class UserController extends Controller
 {
@@ -169,7 +170,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('detail', ['id' => $travelApproval->id])->with('success', 'สำเร็จแล้ว');
+        return redirect()->route('detail', ['uuid' => $travelApproval->uuid])->with('success', 'สำเร็จแล้ว');
     }
 
     public function homepage()
@@ -375,18 +376,21 @@ class UserController extends Controller
 
     public function test()
     {
-        $message = "สวัสดีครับทุกท่าน วันนี้มีความสุข วันนี้ได้กินต้มไก่ใส่แกงหน่อไม้";
-        $totalCharacters = mb_strlen($message, 'UTF-8');
+        // mock data
+        $raw = [
+            ['date' => '25 กรกฎาคม 2567', 'place' => 'ต.สามพี่น้อง อ.แก่งหางแมว', 'tasks' => ['เดินทางเพื่อไปพบผู้บริหารการเงินที่มีบริษัทเซนก', 'รูปทำงานโดยสุจริตเที่ยงธรรม']],
+            ['date' => '26 กรกฎาคม 2567', 'place' => 'ต.กระแจะ อ.นายายอาม จ.จันทบุรี', 'tasks' => ['ไปพบประชาชนต่อหน้าการเสนอโครงร่างนโยบายที่เดี่ยวข', 'องกับเศรษฐกิจโลก', 'และนำความรู้มาพัฒนา']],
+        ];
 
-        if (mb_strlen($message) > 10) {
-            $shortMessage = mb_substr($message, 0, 10); // ตัดข้อความ 40 ตัวอักษรแรก
-            $remainingMessage = mb_substr($message, 10); // ตัดข้อความที่เหลือ
-        } else {
-            $shortMessage = $message;
-            $remainingMessage = '';
+        // นับ total rows ที่ใช้ไปแล้ว
+        $used_rows = 0;
+        foreach ($raw as $item) {
+            $used_rows += count($item['tasks']);
         }
 
-        return view('test', compact('message', 'shortMessage', 'remainingMessage', 'totalCharacters'));
+        $data['travel_data'] = $raw;
+        $data['used_rows']   = $used_rows;
+        $data['total_rows']  = 10; // แถวทั้งหมดในตาราง
     }
 
 
